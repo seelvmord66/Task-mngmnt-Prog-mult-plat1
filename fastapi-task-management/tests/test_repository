@@ -1,0 +1,16 @@
+from app.services.task_service import TaskService
+from app.repositories.task_repository import TaskRepository
+from app.models.task_model import Task
+
+def test_create_task():
+    mock_repo = TaskRepository()
+    service = TaskService(mock_repo)
+    task = service.create_task("Test Task", "Test Description", "Pendente")
+    assert task.title == "Test Task"
+
+def test_get_task_by_id():
+    mock_repo = TaskRepository()
+    service = TaskService(mock_repo)
+    task = service.create_task("Test Task", "Test Description", "Pendente")
+    retrieved_task = service.get_task_by_id(task.id)
+    assert retrieved_task.id == task.id
